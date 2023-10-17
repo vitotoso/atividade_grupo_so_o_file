@@ -29,22 +29,21 @@ def criar_arquivo_csv():
 
 def ler_arquivo_csv():
     try:
-        with open(arquivo_csv, 'r', newline='') as arquivo_csv:
+        with open('arquivo.csv' ,mode= 'r') as arquivo_csv:
             leitor_csv = csv.DictReader(arquivo_csv)
             return list(leitor_csv)
     except FileNotFoundError:
-        print(f'O arquivo {arquivo_csv} não foi encontrado.')
+        print(f"O arquivo não foi encontrado.")
 
 def imprimir_csv():
-    dados = ler_arquivo_csv()
-    for linha in dados:
+    for linha in produtos:
         imp1 = (float(linha['Valor']) * float(linha['Imp1'])) / 100
         imp2 = (float(linha['Valor']) * float(linha['Imp2'])) / 100
         imp3 = (float(linha['Valor']) * float(linha['Imp3'])) / 100
         frete = (float(linha['Frete']) / float(linha['Qnt']))
-        valor_final = float(linha['Valor']) + imp1 + imp2 + imp3 + frete
-        ganho = float(linha['Lucro'])
-        venda = valor_final + (valor_final * (ganho / 100))
+        valordecusto = float(linha['Valor']) + imp1 + imp2 + imp3 + frete
+        lucro = float(linha['Lucro'])
+        valordevenda = valordecusto+ (valordecusto * (lucro/ 100))
         print(linha)
 
 def atualizar_produtos(leitor_csv):
@@ -76,6 +75,7 @@ def atualizar_produtos(leitor_csv):
         print("ID não encontrada!")
 
 def deletar_arquivo(produtos,nome):
+    ler_arquivo_csv()
     nome=input("digite o nome do produto:  ")
     for linha in leitor_csv:
         if linha['Nome'] == nome:
@@ -109,11 +109,11 @@ while True:
         frete=float(input("Valor de Frete:  "))
    
     elif escolha=="2":
-        imprimir_csv(arquivo_csv)
+        imprimir_csv()
         
     elif escolha=="3":
         
-        atualizar_produtos(leitor_csv)
+        atualizar_produtos()
     
     elif escolha == "4":
         
