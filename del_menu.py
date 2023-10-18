@@ -46,7 +46,7 @@ def imprimir_csv():
         valordevenda = valordecusto+ (valordecusto * (lucro/ 100))
         print(linha)
 
-def atualizar_produtos(leitor_csv):
+def atualizar_produtos():
     ler_arquivo_csv()
     nome =  input("Digite o nome do produto que deseja apagar: ")
     for linha in leitor_csv:
